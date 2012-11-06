@@ -50,4 +50,12 @@
         android:layout_toRightOf="@+id/button1"
         android:text="Button" />
 
+    <Button
+        android:id="@+id/pref1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_alignParentLeft="true"
+        android:text="Preferences" />
+
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package com.example.helloandroid;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -21,15 +23,35 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        mImageView = (ImageView)findViewById(R.id.imageView1);
+        
         Button btnTest = (Button)findViewById(R.id.button3);
         btnTest.setOnClickListener(new Button.OnClickListener() {
         	public void onClick(View v) {
-        		new DownloadImageTask().execute("http://s.nx.com/S2/game/bf/bf_obt/Main_new/bg_cs.gif");
+        		
+        		ConnectivityManager connMgr = (ConnectivityManager) 
+        	            getSystemService(Context.CONNECTIVITY_SERVICE);
+        	        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        	        if (networkInfo != null && networkInfo.isConnected()) {
+        	            new DownloadImageTask().execute("http://s.nx.com/S2/game/bf/bf_obt/Main_new/bg_cs.gif");
+        	        } else {
+        	            //.setText("No network connection available.");
+        	        } 
         	}
         	
         });
         
-        mImageView = (ImageView)findViewById(R.id.imageView1);
+        Button btnPref1 = (Button)findViewById(R.id.pref1);
+        btnPref1.setOnClickListener(new Button.OnClickListener() {
+        	
+        	public void onClick(View v) {
+        		
+        		Intent prefIntent = new Intent(MainActivity.this, Pref2Activity.class);
+        		startActivity(prefIntent);
+        	}
+        });
+        
+       
     }
     
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

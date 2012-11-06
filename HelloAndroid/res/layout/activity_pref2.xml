@@ -1,0 +1,4 @@
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <EditTextPreference android:key = "age" android:title="Age" android:summary="How old are you?" android:defaultValue="19" />
+</PreferenceScreen>
